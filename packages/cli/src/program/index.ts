@@ -4,6 +4,7 @@ import { cleanCommand } from "./commands/clean";
 import { formatCommand } from "./commands/format";
 import { lintCommand } from "./commands/lint";
 import { testStaticCommand } from "./commands/test-static";
+import { typecheckCommand } from "./commands/typecheck";
 
 export function createProgram() {
   return new Command("run-run")
@@ -13,5 +14,6 @@ export function createProgram() {
     .addCommand(formatCommand)
     .addCommand(lintCommand)
     .addCommand(testStaticCommand)
-    .addCommand(cleanCommand);
+    .addCommand(cleanCommand)
+    .addCommand(typecheckCommand);
 }

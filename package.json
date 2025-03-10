@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "RR_ENV=dev rr",
+    "dev": "DEBUG=run-run:* RR_ENV=dev rr",
     "test": "turbo test",
     "prepare": "husky"
   },
