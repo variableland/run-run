@@ -6,7 +6,7 @@
     "build": "turbo build",
     "dev": "RR_ENV=dev rr",
     "debug:dev": "DEBUG=run-run:* RR_ENV=dev rr",
-    "test": "LOG=0 turbo test",
+    "test": "turbo test",
     "prepare": "husky"
   },
   "devDependencies": {

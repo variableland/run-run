@@ -1,10 +1,18 @@
 import { createTestProgram, execCli, parseProgram } from "test/helpers";
-import { expect, test, vi } from "vitest";
+import { afterAll, beforeAll, expect, test, vi } from "vitest";
 import { $ } from "~/shell";
 
 const { program } = createTestProgram();
 
 const rootCommands = ["help", "--help", "-v", "--version"];
+
+beforeAll(() => {
+  vi.stubEnv("CI", "false");
+});
+
+afterAll(() => {
+  vi.unstubAllEnvs();
+});
 
 for (const cmd of rootCommands) {
   test(`should match ${cmd}`, async () => {
