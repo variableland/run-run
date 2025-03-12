@@ -68,7 +68,7 @@ jobs:
           bun-version-file: ".bun-version"
 
       - name: 🛠 Debug npm config
-        run: npm config list
+        run: npm config ls -l
 
       # - name: 🚀 Create release PR or publish versions
       #   uses: changesets/action@v1
