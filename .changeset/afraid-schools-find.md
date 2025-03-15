@@ -1,5 +1,5 @@
 ---
-"@variableland/run-run": patch
+"@variableland/run-run": minor
 ---
 
 Add init command
