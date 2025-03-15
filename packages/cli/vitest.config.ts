@@ -5,13 +5,17 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     coverage: {
-      reporter: ["text", "lcov"],
-      exclude: ["__mocks__", "helpers", "test", "src/shell.ts", "src/main.ts"],
+      reporter: ["text", "lcov", "text-summary"],
+      include: ["src"],
     },
     setupFiles: ["./test/setup.ts"],
     alias: {
       "~/shell": "<rootDir>/__mocks__/~/shell.ts",
       "~/logger": "<rootDir>/__mocks__/~/logger.ts",
+    },
+    env: {
+      // required to look the cli package.json up
+      RR_BIN_PATH: "./bin",
     },
   },
 });
