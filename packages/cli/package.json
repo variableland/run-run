@@ -15,7 +15,8 @@
     "build": "bun build src/main.ts --outfile=dist/rr.mjs --target=node --external=zx",
     "test:coverage": "vitest run --coverage",
     "test": "vitest --run",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "preview:release": "./scripts/preview-release"
   },
   "devDependencies": {
     "chalk": "^5.4.1",
