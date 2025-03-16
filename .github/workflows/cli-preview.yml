@@ -34,6 +34,7 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: 📥 Install dependencies
         run: pnpm install
@@ -54,4 +55,5 @@ jobs:
         run: pnpm run --filter @variableland/run-run preview:release
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
