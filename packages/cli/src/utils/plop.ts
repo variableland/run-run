@@ -8,13 +8,12 @@ type RunOptions = Parameters<typeof run>[0];
 
 interface RunPlopOptions {
   rrPath: string;
-  dest: string;
 }
 
 const d = Log.subdebug("run-plop");
 
 export function runPlop(options: RunPlopOptions) {
-  const { rrPath, dest } = options;
+  const { rrPath } = options;
 
   const prepareOptions: PrepareOptions = {
     cwd: rrPath,
@@ -28,8 +27,6 @@ export function runPlop(options: RunPlopOptions) {
       Plop.execute(env, (env) => {
         const runOptions: RunOptions = {
           ...env,
-          // @ts-expect-error
-          dest,
         };
 
         d("run options %O", runOptions);

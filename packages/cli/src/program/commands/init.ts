@@ -23,8 +23,7 @@ export const initCommand = createCommand("init")
       const { runPlop } = await import("~/utils/plop");
 
       await runPlop({
-        rrPath: store.rrPath,
-        dest: store.appPath,
+        rrPath: store.rrPkg.dirPath,
       });
     } catch (error) {
       Log.error("Failed to run init", error);
