@@ -33,7 +33,7 @@ rr help
 
 # Troubleshooting
 
-To enable debug mode, set the `DEBUG` environment variable to `run-run:*` before running *any* the command.
+To enable debug mode, set the `DEBUG` environment variable to `run-run:*` before running *any* command.
 
 ```sh
 DEBUG=run-run:* rr help
