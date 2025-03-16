@@ -2,4 +2,4 @@
 "@variableland/run-run": minor
 ---
 
-Add pkg command
+Add info:pkg command
