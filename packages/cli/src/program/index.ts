@@ -2,9 +2,9 @@ import { Command } from "commander";
 import { BANNER_TEXT, CREDITS_TEXT } from "../ui";
 import { cleanCommand } from "./commands/clean";
 import { formatCommand } from "./commands/format";
+import { infoPkgCommand } from "./commands/info-pkg";
 import { initCommand } from "./commands/init";
 import { lintCommand } from "./commands/lint";
-import { pkgCommand } from "./commands/pkg";
 import { testStaticCommand } from "./commands/test-static";
 import { typecheckCommand } from "./commands/typecheck";
 import { getVersion } from "./version";
@@ -21,5 +21,5 @@ export function createProgram() {
     .addCommand(cleanCommand)
     .addCommand(typecheckCommand)
     .addCommand(initCommand)
-    .addCommand(pkgCommand);
+    .addCommand(infoPkgCommand);
 }

@@ -14,7 +14,7 @@ for (const cmd of rootCommands) {
   });
 }
 
-const hardCommands = ["init", "pkg"];
+const hardCommands = ["init", "info:pkg"];
 
 const easyTesteableCommands = program.commands.filter((command) => {
   const isHard = hardCommands.some((cmd) => command.name() === cmd);
