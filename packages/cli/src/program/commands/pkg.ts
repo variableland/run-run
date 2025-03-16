@@ -4,7 +4,7 @@ import { useStore } from "~/store";
 import { get } from "~/utils/get";
 
 export const pkgCommand = createCommand("pkg")
-  .description("display run-run package.json")
+  .description("display run-run package.json ℹ️")
   .option("-f, --filter <filter>", "lodash get id like to filter info by")
   .action(async function pkgAction(options) {
     const store = useStore();
