@@ -26,33 +26,30 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: ⎔ Setup Node.js
-        uses: actions/setup-node@v4
+      - name: 🔁 Cache dependencies
+        uses: actions/cache@v4
         with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
-          registry-url: "https://registry.npmjs.org"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
-      - name: 📥 Install dependencies
-        run: pnpm install
-
-      - name: 💅 Test Static
-        run: pnpm run dev test:static
-
-      - name: 🧪 Test Unit
-        run: pnpm test
-
-      # needed to build the run-run cli
       - name: 🥟 Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: ".bun-version"
 
+      - name: 📥 Install dependencies
+        run: bun i
+
+      - name: 💅 Test Static
+        run: bun dev test:static
+
+      - name: 🧪 Test Unit
+        run: bun test
+
       - name: 🚀 Publish preview CLI
-        run: pnpm run --filter @variableland/run-run preview:release
+        run: bun preview:release
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry

@@ -19,23 +19,27 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: ⎔ Setup Node.js
-        uses: actions/setup-node@v4
+      - name: 🔁 Cache dependencies
+        uses: actions/cache@v4
         with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: 🥟 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: ".bun-version"
 
       - name: 📥 Install dependencies
-        run: pnpm install
+        run: bun i
 
       - name: 💅 Test Static
-        run: pnpm run dev test:static
+        run: bun dev test:static
 
       - name: 🧪 Test Unit
-        run: pnpm test
+        run: bun test
 
   release:
     runs-on: ubuntu-latest
@@ -49,30 +53,28 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: ⎔ Setup Node.js
-        uses: actions/setup-node@v4
+      - name: 🔁 Cache dependencies
+        uses: actions/cache@v4
         with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
-      - name: 📥 Install dependencies
-        run: pnpm install
-
-      # needed to build the run-run cli
       - name: 🥟 Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: ".bun-version"
+
+      - name: 📥 Install dependencies
+        run: bun i
 
       - name: 🚀 Create release PR or publish versions
         uses: changesets/action@v1
         with:
           commit: "chore: update versions"
           title: "chore: update versions"
-          publish: npx changeset publish
+          publish: bunx changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
