@@ -39,7 +39,7 @@ jobs:
         run: bun dev test:static
 
       - name: 🧪 Test Unit
-        run: bun test
+        run: bun run test
 
   release:
     runs-on: ubuntu-latest
