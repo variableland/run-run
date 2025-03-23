@@ -18,3 +18,4 @@ runs:
 
     - name: 📥 Install dependencies
       run: bun i
+      shell: bash # required for composite actions
