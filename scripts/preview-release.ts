@@ -43,7 +43,9 @@ async function getChangedPackages() {
   const rootPkgJson = await Bun.file("package.json").json();
 
   const packages = getWorkspacesPackages(rootPkgJson.workspaces);
-  const changedPaths = (await $`git diff --name-only origin/main`.text()).trim().split("\n");
+  const changedPaths = (await $`git fetch origin main && git diff --name-only origin/main`.text())
+    .trim()
+    .split("\n");
 
   return packages.filter((pkg) => changedPaths.some((file) => file.startsWith(pkg)));
 }
