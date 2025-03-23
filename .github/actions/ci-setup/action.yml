@@ -3,9 +3,6 @@ name: Setup CI
 runs:
   using: composite
   steps:
-    - name: ⬇️ Checkout repo
-      uses: actions/checkout@v4
-
     - name: 🔁 Cache dependencies
       uses: actions/cache@v4
       with:
