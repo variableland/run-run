@@ -52,5 +52,4 @@ jobs:
         run: bun preview:release
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
