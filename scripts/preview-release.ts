@@ -59,16 +59,10 @@ async function main() {
   const shortGitSha = (await $`git rev-parse --short HEAD`.text()).trim();
   const changedPackages = await getChangedPackages();
 
-  console.log({
-    prNumber,
-    shortGitSha,
-    changedPackages,
-  });
-
-  // for await (const pkg of changedPackages) {
-  //   await $`cd ${pkg} && bunx bumpp prerelease --preid="git-${shortGitSha}" --no-tag --no-commit --no-push --yes`;
-  //   await $`cd ${pkg} && bun publish --tag="pr-${prNumber}"`;
-  // }
+  for await (const pkg of changedPackages) {
+    await $`cd ${pkg} && bunx bumpp prerelease --preid="git-${shortGitSha}" --no-tag --no-commit --no-push --yes`;
+    await $`cd ${pkg} && bun publish --tag="pr-${prNumber}"`;
+  }
 }
 
 main();
