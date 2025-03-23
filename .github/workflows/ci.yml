@@ -35,10 +35,10 @@ jobs:
       - name: 📥 Install dependencies
         run: bun i
 
-      - name: 💅 Test Static
+      - name: 💅 Test static
         run: bun dev test:static
 
-      - name: 🧪 Test Unit
+      - name: 🧪 Test unit
         run: bun run test
 
   release:

@@ -38,19 +38,22 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: ".bun-version"
-          registry-url: "https://registry.npmjs.org"
 
       - name: 📥 Install dependencies
         run: bun i
 
-      - name: 💅 Test Static
+      - name: 💅 Test static
         run: bun dev test:static
 
-      - name: 🧪 Test Unit
+      - name: 🧪 Test unit
         run: bun run test
+
+      - name: 🔑 Configure registry
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
 
       - name: 🚀 Publish preview CLI
         run: bun preview:release
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          BUN_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
