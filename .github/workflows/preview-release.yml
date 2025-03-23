@@ -1,11 +1,11 @@
-name: CLI Preview
+name: Preview release
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - packages/cli/**
+      - packages/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,24 +23,8 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v4
-
-      - name: 🔁 Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
-
-      - name: 🥟 Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version-file: ".bun-version"
-
-      - name: 📥 Install dependencies
-        run: bun i
+      - name: ⌛ Setup CI
+        uses: ./.github/actions/ci-setup
 
       - name: 💅 Test static
         run: bun dev test:static
@@ -48,7 +32,7 @@ jobs:
       - name: 🧪 Test unit
         run: bun run test
 
-      - name: 🚀 Publish preview CLI
+      - name: 🚀 Preview release
         run: bun preview:release
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
