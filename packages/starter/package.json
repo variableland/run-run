@@ -17,7 +17,7 @@
   "bin": {
     "vland": "./bin"
   },
-  "files": ["dist"],
+  "files": ["dist", "bin", "src", "plopfiles"],
   "scripts": {
     "build": "bun build src/main.ts --outfile=dist/main.mjs --target=node",
     "prepublishOnly": "bun run build",
