@@ -14,7 +14,9 @@
   "author": "rcrd <rcrd@variable.land>",
   "type": "module",
   "module": "src/main.ts",
-  "bin": "./bin",
+  "bin": {
+    "vland": "./bin"
+  },
   "files": ["dist"],
   "scripts": {
     "build": "bun build src/main.ts --outfile=dist/main.mjs --target=node",
