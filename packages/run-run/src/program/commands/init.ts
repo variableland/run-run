@@ -1,6 +1,5 @@
+import { Log } from "@variableland/console";
 import { Option, createCommand } from "commander";
-import { Log } from "~/logger";
-import { $ } from "~/shell";
 import { useStore } from "~/store";
 import { cwd } from "~/utils/cwd";
 
@@ -22,7 +21,7 @@ export const initCommand = createCommand("init")
 
       // Dynamic import to avoid reading the process.argv
       // before overwriting it with the predefined options
-      const { runPlop } = await import("~/utils/plop");
+      const { runPlop } = await import("../../utils/plop");
 
       await runPlop({
         rrPath: store.rrPkg.dirPath,
