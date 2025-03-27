@@ -28,6 +28,16 @@ Acknowledgment:
 "
 `;
 
+exports[`should match --version 1`] = `
+"0.0.0-test
+"
+`;
+
+exports[`should match -v 1`] = `
+"0.0.0-test
+"
+`;
+
 exports[`should match clean command 1`] = `"rimraf -g **/.turbo **/dist **/node_modules pnpm-lock.yaml bun.lock"`;
 
 exports[`should match format command 1`] = `"biome format --no-errors-on-unmatched --colors=force"`;

@@ -1,9 +1,6 @@
 import createDebug from "debug";
 
-type DebugFn = (message: string, ...args: unknown[]) => void;
-
-const ROOT_DEBUG_LABEL = "vland";
-const rootDebug = createDebug(`${ROOT_DEBUG_LABEL}:default`);
+type DebugFn = ReturnType<typeof createDebug>;
 
 export interface AnyLogger {
   info: typeof console.log;
@@ -12,13 +9,33 @@ export interface AnyLogger {
   subdebug: (label: string) => DebugFn;
 }
 
-export const Log: AnyLogger = {
-  info: console.log.bind(console),
-  error: console.error.bind(console),
-  debug: (message: string, ...args: unknown[]) => {
-    rootDebug(message, ...args);
-  },
-  subdebug: (label: string): DebugFn => {
-    return createDebug(`${ROOT_DEBUG_LABEL}:${label}`);
-  },
-};
+export class Logger implements AnyLogger {
+  #debug: DebugFn;
+
+  #rootLabel: string;
+
+  constructor(rootLabel: string) {
+    this.#debug = createDebug(`${rootLabel}:default`);
+    this.#rootLabel = rootLabel;
+  }
+
+  info(message: string, ...args: unknown[]) {
+    console.log(message, ...args);
+  }
+
+  error(message: string, ...args: unknown[]) {
+    console.error(message, ...args);
+  }
+
+  subdebug(label: string) {
+    return createDebug(`${this.#rootLabel}:${label}`);
+  }
+
+  get debug() {
+    return this.#debug;
+  }
+}
+
+export function createLogger(rootLabel: string) {
+  return new Logger(rootLabel);
+}

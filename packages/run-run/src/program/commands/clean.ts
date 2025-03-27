@@ -1,6 +1,6 @@
-import { Log } from "@variableland/console";
+import { $ } from "@variableland/clibuddy";
 import { createCommand } from "commander";
-import { $ } from "~/shell";
+import { Logger } from "~/services/logger";
 
 export const cleanCommand = createCommand("clean")
   .description("delete dirty folders or files such as node_modules, etc 🗑️")
@@ -8,20 +8,20 @@ export const cleanCommand = createCommand("clean")
   .action(async function cleanCommandAction(options) {
     try {
       if (options.onlyDist) {
-        Log.info("Cleaning only 'dist' folders... ⌛");
+        Logger.info("Cleaning only 'dist' folders... ⌛");
         await $`rimraf -g **/dist`;
-        Log.info("Done ✅");
+        Logger.info("Done ✅");
         return;
       }
 
-      Log.info("Cleaning all... ⌛");
+      Logger.info("Cleaning all... ⌛");
 
       const dirtyPaths = ["**/.turbo", "**/dist", "**/node_modules", "pnpm-lock.yaml", "bun.lock"];
 
-      Log.info(dirtyPaths.join("\n"));
+      Logger.info(dirtyPaths.join("\n"));
 
       await $`rimraf -g ${dirtyPaths.join(" ")}`;
-      Log.info("Done ✅");
+      Logger.info("Done ✅");
     } catch {
       process.exit(1);
     }

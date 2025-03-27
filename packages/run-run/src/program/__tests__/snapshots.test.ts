@@ -1,10 +1,10 @@
+import { $ } from "@variableland/clibuddy";
 import { createTestProgram, execCli, parseProgram } from "test/helpers";
 import { expect, test, vi } from "vitest";
-import { $ } from "~/shell";
 
 const { program } = createTestProgram();
 
-const rootCommands = ["help", "--help"];
+const rootCommands = ["help", "--help", "--version", "-v"];
 
 for (const cmd of rootCommands) {
   test(`should match ${cmd}`, async () => {
@@ -14,7 +14,7 @@ for (const cmd of rootCommands) {
   });
 }
 
-const hardCommands = ["init", "info:pkg"];
+const hardCommands = ["info:pkg"];
 
 const easyTesteableCommands = program.commands.filter((command) => {
   const isHard = hardCommands.some((cmd) => command.name() === cmd);

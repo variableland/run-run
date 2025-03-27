@@ -23,9 +23,11 @@
     "prepublishOnly": "bun run build",
     "typecheck": "./bin tsc"
   },
-  "devDependencies": {
-    "plop": "4.0.1",
-    "@variableland/console": "workspace:*"
+  "dependencies": {
+    "@variableland/console": "workspace:*",
+    "@variableland/clibuddy": "workspace:*",
+    "commander": "13.1.0",
+    "plop": "4.0.1"
   },
   "publishConfig": {
     "access": "public"

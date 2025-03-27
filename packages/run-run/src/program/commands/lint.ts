@@ -1,5 +1,5 @@
+import { $ } from "@variableland/clibuddy";
 import { createCommand } from "commander";
-import { $ } from "~/shell";
 
 export const lintCommand = createCommand("lint")
   .description("lint the code 🧹")
