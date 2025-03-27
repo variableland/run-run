@@ -30,7 +30,7 @@ jobs:
         uses: ./.github/actions/ci-setup
 
       - name: 💅 Test static
-        run: bun dev test:static
+        run: bun run rr test:static
 
       - name: 🧪 Test unit
         run: bun run test
