@@ -20,9 +20,9 @@ function getWorkspacesPackages(workspaces: string[]) {
 
     const pattern = workspace.replace("*", "**/package.json");
     const glob = new Glob(pattern);
-    const files = Array.from(glob.scanSync());
+    const pkgJsonPaths = Array.from(glob.scanSync());
 
-    return files.map((file) => dirname(file));
+    return pkgJsonPaths.map((pkgJsonPath) => dirname(pkgJsonPath));
   };
 
   return workspaces.flatMap(collect);
