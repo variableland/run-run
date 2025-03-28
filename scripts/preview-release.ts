@@ -51,20 +51,23 @@ async function getChangedPackages() {
 }
 
 /**
- * Publish a preview release package
+ * Bump the package version
  *
- * @param pkg - The package to publish.
+ * @param pkg - The package directory to bump.
  * @param shortGitSha - The short git sha.
+ */
+async function bumpPackage(pkg: string, shortGitSha: string) {
+  await $`cd ${pkg} && bunx bumpp prerelease --preid="git-${shortGitSha}" --no-tag --no-commit --no-push --yes`;
+}
+
+/**
+ * Publish the package
+ *
+ * @param pkg - The package directory to publish.
  * @param prNumber - The pull request number.
  */
-async function publishPreviewReleasePackage(pkg: string, shortGitSha: string, prNumber: string) {
-  try {
-    await $`cd ${pkg} && bunx bumpp prerelease --preid="git-${shortGitSha}" --no-tag --no-commit --no-push --yes`;
-    await $`cd ${pkg} && bun publish --tag="pr-${prNumber}"`;
-  } catch (error) {
-    console.error(`Failed to publish package ${pkg}:`, error);
-    throw error;
-  }
+async function publishPackage(pkg: string, prNumber: string) {
+  await $`cd ${pkg} && bun publish --tag="pr-${prNumber}"`;
 }
 
 async function main() {
@@ -82,8 +85,20 @@ async function main() {
 
   await Bun.write(".npmrc", `//registry.npmjs.org/:_authToken=${Bun.env.NPM_TOKEN}`);
 
-  for await (const pkg of changedPackages) {
-    await publishPreviewReleasePackage(pkg, shortGitSha, prNumber);
+  try {
+    for await (const pkg of changedPackages) {
+      await bumpPackage(pkg, shortGitSha);
+    }
+  } catch (error) {
+    throw new Error("Failed to bump packages", { cause: error });
+  }
+
+  try {
+    for await (const pkg of changedPackages) {
+      await publishPackage(pkg, prNumber);
+    }
+  } catch (error) {
+    throw new Error("Failed to publish packages", { cause: error });
   }
 }
 
