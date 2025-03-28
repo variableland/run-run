@@ -15,7 +15,7 @@ export interface ContextValue {
 export const ctx = createContextService<ContextValue>();
 
 export async function createContextValue(): Promise<ContextValue> {
-  const d = Logger.subdebug("create-store");
+  const d = Logger.subdebug("create-context-value");
 
   if (!process.env.BIN_PATH) {
     throw new Error("Required BIN_PATH env var");
