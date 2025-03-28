@@ -79,11 +79,9 @@ async function main() {
     throw new Error("NPM_TOKEN environment variable is required");
   }
 
-  const prNumber = Bun.env.PR_NUMBER;
-  const shortGitSha = (await $`git rev-parse --short HEAD`.text()).trim();
   const changedPackages = await getChangedPackages();
 
-  await Bun.write(".npmrc", `//registry.npmjs.org/:_authToken=${Bun.env.NPM_TOKEN}`);
+  const shortGitSha = (await $`git rev-parse --short HEAD`.text()).trim();
 
   try {
     for await (const pkg of changedPackages) {
@@ -93,9 +91,11 @@ async function main() {
     throw new Error("Failed to bump packages", { cause: error });
   }
 
+  await Bun.write(".npmrc", `//registry.npmjs.org/:_authToken=${Bun.env.NPM_TOKEN}`);
+
   try {
     for await (const pkg of changedPackages) {
-      await publishPackage(pkg, prNumber);
+      await publishPackage(pkg, Bun.env.PR_NUMBER);
     }
   } catch (error) {
     throw new Error("Failed to publish packages", { cause: error });
