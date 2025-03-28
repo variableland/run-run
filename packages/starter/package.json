@@ -17,7 +17,7 @@
   "bin": {
     "vland": "./bin"
   },
-  "files": ["dist", "bin", "src", "plopfiles"],
+  "files": ["bin", "src", "plopfiles"],
   "scripts": {
     "build": "bun build src/main.ts --outfile=dist/main.mjs --target=node",
     "prepublishOnly": "bun run build",
@@ -27,7 +27,7 @@
     "@variableland/console": "workspace:*",
     "@variableland/clibuddy": "workspace:*",
     "commander": "13.1.0",
-    "plop": "4.0.1"
+    "node-plop": "0.32.0"
   },
   "publishConfig": {
     "access": "public"

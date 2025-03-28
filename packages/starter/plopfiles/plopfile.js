@@ -7,6 +7,11 @@ export default function configPlop(plop) {
     prompts: [
       {
         type: "input",
+        name: "template",
+        message: "Template:",
+      },
+      {
+        type: "input",
         name: "name",
         message: "Name:",
       },
@@ -14,11 +19,6 @@ export default function configPlop(plop) {
         type: "input",
         name: "description",
         message: "Description:",
-      },
-      {
-        type: "input",
-        name: "template",
-        message: "Template:",
       },
     ],
     actions: [

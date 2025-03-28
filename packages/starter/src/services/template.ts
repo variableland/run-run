@@ -1,40 +1,34 @@
-import path from "node:path";
-import { Plop, run } from "plop";
+import type { NodePlopAPI } from "node-plop";
 import { Logger } from "./logger";
 
-type PlopType = typeof Plop;
-type PrepareOptions = Parameters<PlopType["prepare"]>[0];
-type RunOptions = Parameters<typeof run>[0];
+type GenerateOptions = {
+  generatorId: string;
+  template: string;
+};
 
-export class TemplateService {
-  async generate(options: { cwd: string; dest: string }) {
-    const { cwd, dest } = options;
+export class PlopTemplateService {
+  #plop: NodePlopAPI;
+
+  constructor(plop: NodePlopAPI) {
+    this.#plop = plop;
+  }
+
+  async generate(options: GenerateOptions) {
+    const { generatorId, template } = options;
 
     const d = Logger.subdebug("generate");
 
-    const prepareOptions: PrepareOptions = {
-      cwd,
-      configPath: path.join(cwd, "plopfiles", "plopfile.js"),
-    };
+    const generator = this.#plop.getGenerator(generatorId);
 
-    d("prepare options %O", prepareOptions);
+    const answers = await generator.runPrompts([template]);
 
-    return new Promise((resolve, reject) => {
-      Plop.prepare(prepareOptions, (env) => {
-        Plop.execute(env, (env) => {
-          const runOptions: RunOptions = {
-            ...env,
-            // @ts-expect-error
-            dest,
-          };
-
-          d("run options %O", runOptions);
-
-          run(runOptions, undefined, true).then(resolve, reject);
-        });
-      });
+    const results = await generator.runActions({
+      ...answers,
+      template,
     });
+
+    d("Plop results %O", results);
+
+    // TODO: handle results, print them, fail if any errors
   }
 }
-
-export const templateService = new TemplateService();
