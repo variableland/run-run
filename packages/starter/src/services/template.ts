@@ -4,6 +4,7 @@ import { Logger } from "./logger";
 type GenerateOptions = {
   generatorId: string;
   template: string;
+  folder: string;
 };
 
 export class PlopTemplateService {
@@ -14,13 +15,13 @@ export class PlopTemplateService {
   }
 
   async generate(options: GenerateOptions) {
-    const { generatorId, template } = options;
+    const { generatorId, template, folder } = options;
 
     const d = Logger.subdebug("generate");
 
     const generator = this.#plop.getGenerator(generatorId);
 
-    const answers = await generator.runPrompts([template]);
+    const answers = await generator.runPrompts([template, folder]);
 
     const results = await generator.runActions({
       ...answers,

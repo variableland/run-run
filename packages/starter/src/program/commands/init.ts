@@ -46,16 +46,19 @@ export const initCommand = createCommand("init")
       await templateService.generate({
         generatorId: META.GENERATOR_ID,
         template,
+        folder,
       });
 
       if (options.git) {
-        await $`cd ${folder} && git init`;
-        Logger.info("git init...");
+        Logger.start("Creating git repository");
+        await $.quiet`cd ${folder} && git init`;
+        Logger.success("Git repository created");
       }
 
       if (options.install) {
+        Logger.start("Installing dependencies");
         // await $`cd ${options.folder} npm install`;
-        Logger.info("install deps...");
+        Logger.success("Dependencies installed");
       }
     } catch (error) {
       Logger.error(error);

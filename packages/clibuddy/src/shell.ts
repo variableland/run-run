@@ -23,7 +23,7 @@ export function quote(arg: string) {
     .replace(/\0/g, "\\0");
 }
 
-export const $ = make$({
+const shell = make$({
   cwd,
   verbose: true,
   quote: (arg: unknown) => {
@@ -37,4 +37,8 @@ export const $ = make$({
 
     throw TypeError(`Unsupported argument type: ${typeof arg}`);
   },
+});
+
+export const $ = Object.assign(shell, {
+  quiet: shell({ verbose: false }),
 });
