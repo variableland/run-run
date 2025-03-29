@@ -6,4 +6,4 @@
 "@variableland/starter": patch
 ---
 
-Fix publish script
+Move to bun to fix publish script using pnpm
