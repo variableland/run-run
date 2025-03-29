@@ -1,5 +1,6 @@
-import { $ } from "@variableland/clibuddy";
+import { cwd } from "@variableland/clibuddy";
 import { createCommand } from "commander";
+import { rimraf } from "rimraf";
 import { Logger } from "~/services/logger";
 
 export const cleanCommand = createCommand("clean")
@@ -9,8 +10,16 @@ export const cleanCommand = createCommand("clean")
     try {
       if (options.onlyDist) {
         Logger.info("Cleaning only 'dist' folders... ⌛");
-        await $`rimraf -g **/dist`;
+
+        await rimraf("**/dist", {
+          glob: {
+            cwd,
+            ignore: ["**/node_modules/**"],
+          },
+        });
+
         Logger.info("Done ✅");
+
         return;
       }
 
@@ -20,13 +29,19 @@ export const cleanCommand = createCommand("clean")
 
       Logger.info(dirtyPaths.join("\n"));
 
-      await $`rimraf -g ${dirtyPaths.join(" ")}`;
+      await rimraf(dirtyPaths, {
+        glob: {
+          cwd,
+        },
+      });
+
       Logger.info("Done ✅");
-    } catch {
+    } catch (error) {
+      Logger.error(error);
       process.exit(1);
     }
   })
   .addHelpText(
     "afterAll",
-    "\nUnder the hood, this command uses the rimraf CLI to delete dirty folders or files.",
+    "\nUnder the hood, this command uses the rimraf.js to delete dirty folders or files.",
   );

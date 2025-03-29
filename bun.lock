@@ -41,6 +41,7 @@
       "name": "@variableland/console",
       "version": "0.0.1",
       "dependencies": {
+        "consola": "^3.4.2",
         "debug": "^4.4.0",
       },
       "devDependencies": {

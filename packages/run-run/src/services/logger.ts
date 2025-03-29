@@ -1,3 +1,5 @@
 import { createLogger } from "@variableland/console";
 
-export const Logger = createLogger("run-run");
+export const Logger = createLogger({
+  debugLabel: "run-run",
+});

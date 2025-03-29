@@ -15,7 +15,8 @@ export const typecheckCommand = createCommand("typecheck")
       } else {
         Logger.info("No tsconfig.json found. Skipping type checking.");
       }
-    } catch {
+    } catch (error) {
+      Logger.error(error);
       process.exit(1);
     }
   })

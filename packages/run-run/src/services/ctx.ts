@@ -7,10 +7,10 @@ import {
 } from "@variableland/clibuddy";
 import { Logger } from "./logger";
 
-export interface ContextValue {
-  rrPkg: PkgService;
-  appPkg: PkgService | null;
-}
+export type ContextValue = {
+  binPkg: PkgService;
+  appPkg: PkgService;
+};
 
 export const ctx = createContextService<ContextValue>();
 
@@ -23,27 +23,28 @@ export async function createContextValue(): Promise<ContextValue> {
 
   const binPath = fs.realpathSync(process.env.BIN_PATH);
 
-  d("bin path %s", binPath);
-  d("process cwd %s", process.cwd());
+  d("bin path:", binPath);
+  d("process cwd:", process.cwd());
 
   if (process.env.PWD) {
-    d("PWD %s", process.env.PWD);
+    d("env.PWD:", process.env.PWD);
   }
 
-  const [appPkg, rrPkg] = await Promise.all([createPkgService(cwd), createPkgService(binPath)]);
+  const [appPkg, binPkg] = await Promise.all([createPkgService(cwd), createPkgService(binPath)]);
 
-  if (!rrPkg) {
-    throw new Error("Could not find run-run package.json");
+  if (!binPkg) {
+    throw new Error("Could not find bin package.json");
   }
 
-  if (appPkg) {
-    d("app pkg info %O", appPkg.info());
+  if (!appPkg) {
+    throw new Error("Could not find app package.json");
   }
 
-  d("rr pkg info %O", rrPkg.info());
+  d("app pkg info: %O", appPkg.info());
+  d("bin pkg info: %O", binPkg.info());
 
   return {
     appPkg,
-    rrPkg,
+    binPkg,
   };
 }

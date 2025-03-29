@@ -6,10 +6,10 @@ export function getVersion() {
 
   const version = process.env.VERSION || pkg.version;
 
-  d("resolved version: %s", version);
+  d("resolved version:", version);
 
   if (process.env.VERSION) {
-    d("VERSION in env: %s", process.env.VERSION);
+    d("VERSION in env:", process.env.VERSION);
   }
 
   return version;

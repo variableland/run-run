@@ -16,9 +16,9 @@
   "exports": {
     ".": {
       "bun": "./src/index.ts",
-      "default": "./dist/index.js",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     }
   },
   "main": "./dist/index.cjs",
@@ -32,9 +32,9 @@
   },
   "dependencies": {
     "chalk": "5.4.1",
+    "read-package-up": "11.0.0",
     "supports-color": "10.0.0",
-    "zx": "8.4.0",
-    "read-package-up": "11.0.0"
+    "zx": "8.4.0"
   },
   "publishConfig": {
     "access": "public"

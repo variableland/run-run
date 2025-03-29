@@ -27,7 +27,7 @@ export class PlopTemplateService {
       template,
     });
 
-    d("Plop results %O", results);
+    d("plop results: %O", results);
 
     // TODO: handle results, print them, fail if any errors
   }

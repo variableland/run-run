@@ -8,15 +8,10 @@ export const infoPkgCommand = createCommand("info:pkg")
   .option("-f, --filter <filter>", "lodash get id like to filter info by")
   .option("-c, --current", "display package.json where run-run will be executed")
   .action(async function pkgAction(options) {
-    const { appPkg, rrPkg } = ctx.value;
-
     try {
-      const infoObject = options.current ? appPkg?.info() : rrPkg.info();
+      const { appPkg, binPkg } = ctx.value;
 
-      if (!infoObject) {
-        Logger.error("No information found");
-        return;
-      }
+      const infoObject = options.current ? appPkg.info() : binPkg.info();
 
       if (!options.filter) {
         Logger.info("%O", infoObject);
@@ -32,7 +27,8 @@ export const infoPkgCommand = createCommand("info:pkg")
       }
 
       Logger.info("%O", { [filter]: subInfoObject });
-    } catch {
+    } catch (error) {
+      Logger.error(error);
       process.exit(1);
     }
   });
