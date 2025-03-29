@@ -14,7 +14,8 @@ for (const cmd of rootCommands) {
   });
 }
 
-const hardCommands = ["info:pkg"];
+// these command don't use shell ($) instance
+const hardCommands = ["info:pkg", "clean"];
 
 const easyTesteableCommands = program.commands.filter((command) => {
   const isHard = hardCommands.some((cmd) => command.name() === cmd);
