@@ -25,7 +25,6 @@ export const initCommand = createCommand("init")
   )
   .addOption(new Option("-d, --dest", "destination path to create folder").default(cwd))
   .addOption(new Option("--no-git", "skip to create a git repository").default(true))
-  .addOption(new Option("--no-install", "skip to install the dependencies").default(true))
   .action(async function initAction(template: string, folder: string, options: InitOptions) {
     try {
       const d = Logger.subdebug("init");
@@ -53,12 +52,6 @@ export const initCommand = createCommand("init")
         Logger.start("Creating git repository");
         await $.quiet`cd ${folder} && git init`;
         Logger.success("Git repository created");
-      }
-
-      if (options.install) {
-        Logger.start("Installing dependencies");
-        // await $`cd ${options.folder} npm install`;
-        Logger.success("Dependencies installed");
       }
     } catch (error) {
       Logger.error(error);
