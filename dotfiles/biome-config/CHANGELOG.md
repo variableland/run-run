@@ -1,5 +1,11 @@
 # @variableland/biome-config
 
+## 0.0.7
+
+### Patch Changes
+
+- [#44](https://github.com/variableland/dx/pull/44) [`3ddbfc6`](https://github.com/variableland/dx/commit/3ddbfc690862a8a536d8238fea2689862123a1b4) Thanks [@rqbazan](https://github.com/rqbazan)! - Fix publish command
+
 ## 0.0.6
 
 ### Patch Changes
