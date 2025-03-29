@@ -14,6 +14,16 @@ for (const cmd of rootCommands) {
   });
 }
 
+for (const command of program.commands) {
+  const cmd = command.name();
+
+  test(`should match help message for ${cmd}`, async () => {
+    const { stdout } = await execCli(`${cmd} --help`);
+
+    expect(stdout).toMatchSnapshot();
+  });
+}
+
 // these command don't use shell ($) instance
 const hardCommands = ["info:pkg", "clean"];
 
@@ -24,12 +34,6 @@ const easyTesteableCommands = program.commands.filter((command) => {
 
 for (const command of easyTesteableCommands) {
   const cmd = command.name();
-
-  test(`should match help message for ${cmd}`, async () => {
-    const { stdout } = await execCli(`${cmd} --help`);
-
-    expect(stdout).toMatchSnapshot();
-  });
 
   test(`should match ${cmd} command`, async () => {
     await parseProgram([cmd]);
