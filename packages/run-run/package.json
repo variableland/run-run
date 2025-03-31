@@ -15,8 +15,8 @@
   "type": "module",
   "module": "src/main.ts",
   "bin": {
-    "rr": "./bin",
-    "run-run": "./bin"
+    "rr": "./bin.ts",
+    "run-run": "./bin.ts"
   },
   "files": ["dist", "plopfiles", "bin"],
   "scripts": {
