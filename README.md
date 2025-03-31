@@ -63,7 +63,7 @@ If you have [mise](https://mise.jdx.dev) installed, you can use the following co
 
 ### Release
 
-This monorepo uses [Changesets](https://github.com/changesets/changesets) to manage releases. The [Changeset bot](https://github.com/changesets/bot) is also installed in the repository.
+This monorepo uses [Changesets](https://github.com/changesets/changesets) to manage releases. The [Changesets bot](https://github.com/changesets/bot) is also installed in the repository.
 
 **Preview Release**:
 
