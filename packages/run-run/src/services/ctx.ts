@@ -26,10 +26,6 @@ export async function createContextValue(): Promise<ContextValue> {
   debug("bin path:", binPath);
   debug("process cwd:", process.cwd());
 
-  if (Bun.env.PWD) {
-    debug("env.PWD:", Bun.env.PWD);
-  }
-
   const [appPkg, binPkg] = await Promise.all([createPkgService(cwd), createPkgService(binPath)]);
 
   if (!binPkg) {
