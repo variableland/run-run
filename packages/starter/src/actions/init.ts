@@ -2,7 +2,7 @@ import fs from "node:fs";
 import { basename } from "node:path";
 import type { DebugInstance } from "@variableland/console";
 import { console } from "~/services/console";
-import { shell } from "~/services/shell";
+import { $ } from "~/services/shell";
 import type { TemplateService } from "~/services/types";
 import type { AnyAction } from "./types";
 
@@ -45,7 +45,7 @@ export class InitAction implements AnyAction<ExecuteOptions> {
 
     console.success("Project generated");
 
-    const $$ = shell.$quiet({ cwd: folderPath });
+    const $$ = $.quiet({ cwd: folderPath });
 
     if (git) {
       console.start("Creating git repository");

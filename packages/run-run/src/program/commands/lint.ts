@@ -1,6 +1,6 @@
 import { createCommand } from "commander";
 import { console } from "~/services/console";
-import { shell } from "~/services/shell";
+import { $ } from "~/services/shell";
 
 export const lintCommand = createCommand("lint")
   .description("lint the code 🧹")
@@ -11,12 +11,12 @@ export const lintCommand = createCommand("lint")
 
     try {
       if (options.fix) {
-        await shell.$`${toolCmd} --fix --unsafe`;
+        await $`${toolCmd} --fix --unsafe`;
         return;
       }
 
       if (options.check) {
-        await shell.$`${toolCmd}`;
+        await $`${toolCmd}`;
       }
     } catch (error) {
       console.error(error);
