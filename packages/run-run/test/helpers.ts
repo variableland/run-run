@@ -7,7 +7,7 @@ const execAsync = promisify(exec);
 
 async function createProgram() {
   const { createProgram } = await import("../src/program");
-  const { shell } = await import("../src/services/shell");
+  const { $ } = await import("../src/services/shell");
 
   const program = createProgram();
 
@@ -23,8 +23,8 @@ async function createProgram() {
   });
 
   return {
+    $,
     program,
-    shell,
     exitFn,
     writeOutFn,
     writeErrFn,
