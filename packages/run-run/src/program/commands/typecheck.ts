@@ -1,7 +1,7 @@
-import { $ } from "@variableland/clibuddy";
 import { createCommand } from "commander";
 import { console } from "~/services/console";
 import { ctx } from "~/services/ctx";
+import { shell } from "~/services/shell";
 
 export const typecheckCommand = createCommand("typecheck")
   .alias("tsc")
@@ -11,7 +11,7 @@ export const typecheckCommand = createCommand("typecheck")
 
     try {
       if (appPkg?.hasFile("tsconfig.json")) {
-        await $`tsc --noEmit`;
+        await shell.$`tsc --noEmit`;
       } else {
         console.info("No tsconfig.json found. Skipping type checking.");
       }

@@ -1,6 +1,6 @@
-import { $ } from "@variableland/clibuddy";
 import { createCommand } from "commander";
 import { console } from "~/services/console";
+import { shell } from "~/services/shell";
 
 export const formatCommand = createCommand("format")
   .alias("fmt")
@@ -12,12 +12,12 @@ export const formatCommand = createCommand("format")
 
     try {
       if (options.fix) {
-        await $`${toolCmd} --fix`;
+        await shell.$`${toolCmd} --fix`;
         return;
       }
 
       if (options.check) {
-        await $`${toolCmd}`;
+        await shell.$`${toolCmd}`;
       }
     } catch (error) {
       console.error(error);

@@ -1,6 +1,6 @@
-import { $ } from "@variableland/clibuddy";
 import { createCommand } from "commander";
 import { console } from "~/services/console";
+import { shell } from "~/services/shell";
 
 export const lintCommand = createCommand("lint")
   .description("lint the code 🧹")
@@ -11,12 +11,12 @@ export const lintCommand = createCommand("lint")
 
     try {
       if (options.fix) {
-        await $`${toolCmd} --fix --unsafe`;
+        await shell.$`${toolCmd} --fix --unsafe`;
         return;
       }
 
       if (options.check) {
-        await $`${toolCmd}`;
+        await shell.$`${toolCmd}`;
       }
     } catch (error) {
       console.error(error);

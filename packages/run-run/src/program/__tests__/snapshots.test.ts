@@ -1,13 +1,12 @@
 import { afterEach, expect, test } from "bun:test";
-import { $ } from "@variableland/clibuddy";
 import { createTestProgram, execCli, mocked, parseProgram } from "test/helpers";
 
-const { program } = await createTestProgram();
+const { program, shell } = await createTestProgram();
 
 const rootCommands = ["help", "--help", "--version", "-v"];
 
 afterEach(() => {
-  mocked($).mockClear();
+  mocked(shell.$).mockClear();
 });
 
 for (const cmd of rootCommands) {
@@ -42,7 +41,7 @@ for (const command of easyTesteableCommands) {
   test(`should match "${cmd}" command`, async () => {
     await parseProgram([cmd]);
 
-    expect($).toHaveBeenCalledTimes(1);
-    expect(mocked($).mock.results[0]?.value).toMatchSnapshot();
+    expect(shell.$).toHaveBeenCalledTimes(1);
+    expect(mocked(shell.$).mock.results[0]?.value).toMatchSnapshot();
   });
 }

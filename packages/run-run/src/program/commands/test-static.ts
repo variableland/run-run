@@ -1,7 +1,7 @@
-import { $ } from "@variableland/clibuddy";
 import { createCommand } from "commander";
 import isCI from "is-ci";
 import { console } from "~/services/console";
+import { shell } from "~/services/shell";
 
 export const testStaticCommand = createCommand("test:static")
   .description("check format and lint issues ✅")
@@ -12,16 +12,16 @@ export const testStaticCommand = createCommand("test:static")
 
     try {
       if (options.fix) {
-        await $`${toolCmd()} --fix --unsafe`;
+        await shell.$`${toolCmd()} --fix --unsafe`;
         return;
       }
 
       if (options.fixStaged) {
-        await $`${toolCmd()} --no-errors-on-unmatched --fix --unsafe --staged`;
+        await shell.$`${toolCmd()} --no-errors-on-unmatched --fix --unsafe --staged`;
         return;
       }
 
-      await $`${toolCmd(isCI ? "ci" : "check")}`;
+      await shell.$`${toolCmd(isCI ? "ci" : "check")}`;
     } catch (error) {
       console.error(error);
       process.exit(1);
