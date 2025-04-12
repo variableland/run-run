@@ -10,7 +10,11 @@ export class ConfigService {
 
   getTemplateChoices() {
     const folderPath = this.#getPlopFolderDir("templates");
-    return fs.readdirSync(folderPath).sort();
+
+    return fs
+      .readdirSync(folderPath)
+      .filter((folder) => !folder.startsWith("#"))
+      .sort();
   }
 
   #getPlopFolderDir(folder: string) {

@@ -26,6 +26,15 @@ export default function configPlop(plop: NodePlopAPI) {
       {
         type: "addMany",
         destination: ".",
+        base: "templates/#common",
+        templateFiles: ["templates/#common/**"],
+        globOptions: {
+          dot: true,
+        },
+      },
+      {
+        type: "addMany",
+        destination: ".",
         base: "templates/{{template}}",
         templateFiles: ["templates/{{template}}/**"],
         globOptions: {
