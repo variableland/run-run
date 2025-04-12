@@ -1,7 +1,9 @@
 import type { NodePlopAPI } from "node-plop";
-import { configService } from "~/services/config";
+import { ConfigService } from "~/services/config";
 
 export default function configPlop(plop: NodePlopAPI) {
+  const configService = new ConfigService();
+
   function atLeastOne(answer: string[]) {
     if (answer.length === 0) {
       return "At least one option must be selected";
