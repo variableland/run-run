@@ -1,8 +1,10 @@
+import path from "node:path";
 import type { NodePlopAPI } from "node-plop";
 import { ConfigService } from "~/services/config";
 
 export default function configPlop(plop: NodePlopAPI) {
-  const configService = new ConfigService();
+  const baseDir = path.dirname(plop.getPlopfilePath());
+  const configService = new ConfigService(baseDir);
 
   function atLeastOne(answer: string[]) {
     if (answer.length === 0) {
