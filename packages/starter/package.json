@@ -24,7 +24,6 @@
     "typecheck": "rr tsc"
   },
   "dependencies": {
-    "@inquirer/prompts": "^7.4.1",
     "@variableland/clibuddy": "workspace:*",
     "@variableland/console": "workspace:*",
     "commander": "13.1.0",
