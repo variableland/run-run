@@ -20,8 +20,6 @@
   },
   "files": ["dist", "plopfiles", "bin"],
   "scripts": {
-    "build": "bun build src/main.ts --outfile=dist/main.mjs --target=node --external=zx",
-    "prepublishOnly": "bun run build",
     "test": "bun test",
     "typecheck": "rr tsc"
   },
