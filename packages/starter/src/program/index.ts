@@ -8,5 +8,9 @@ import { BANNER_TEXT } from "./ui";
 export function createProgram() {
   const version = getVersion(ctx.value.binPkg);
 
-  return new Command("vland").version(version, "-v, --version").addHelpText("before", BANNER_TEXT).addCommand(initCommand).addCommand(addCommand);
+  return new Command("vland")
+    .version(version, "-v, --version")
+    .addHelpText("before", BANNER_TEXT)
+    .addCommand(initCommand)
+    .addCommand(addCommand);
 }
