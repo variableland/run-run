@@ -18,7 +18,7 @@
     "rr": "./bin.ts",
     "run-run": "./bin.ts"
   },
-  "files": ["dist", "plopfiles", "bin"],
+  "files": ["bin", "src", "plopfiles", "tsconfig.json"],
   "scripts": {
     "test": "bun test",
     "typecheck": "rr tsc"
