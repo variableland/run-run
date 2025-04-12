@@ -1,6 +1,7 @@
 {
   "name": "@variableland/{{name}}",
   "version": "0.0.0",
+  "private": true,
   "description": "{{description}}",
   "homepage": "https://github.com/variableland/{{name}}#readme",
   "bugs": {
@@ -13,29 +14,11 @@
   "license": "MIT",
   "author": "rcrd <rcrd@variable.land>",
   "type": "module",
-  "exports": {
-    ".": {
-      "bun": "./src/index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
-    }
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": ["dist", "src"],
-  "scripts": {
-    "dev": "bun run src/index.ts",
-    "test": "echo \"not defined yet\"",
-    "prepare": "husky"
-  },
   "devDependencies": {
+    "@total-typescript/tsconfig": "1.0.4",
+    "@types/bun": "1.2.9",
     "@variableland/run-run": "latest",
-    "husky": "9.1.7"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@variableland/biome-config": "latest"
   },
   "engines": {
     "bun": ">=1.0.0"
