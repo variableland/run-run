@@ -39,5 +39,5 @@ jobs:
 
       - name: 🚀 Preview release
         uses: variableland/gh-actions/actions/monorepo-preview-release@main
-        env:
-          AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        with:
+          auth_token: ${{ secrets.NPM_TOKEN }}
