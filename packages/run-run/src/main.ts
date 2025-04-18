@@ -10,5 +10,3 @@ export async function main(options: Options) {
     process.exit(1);
   }
 }
-
-// force preview release
