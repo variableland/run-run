@@ -38,7 +38,7 @@ jobs:
       #   run: bun run test
 
       - name: 🚀 Preview release
-        uses: variableland/gh-actions/actions/monorepo-preview-release@cadb32123b9889c1bb7ff96b93a2787650e8c190
+        uses: variableland/gh-actions/actions/monorepo-preview-release@4538bb1e51dc202a9b97790ee334ac2704c0b8c4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_number: ${{ github.event.pull_request.number }}
