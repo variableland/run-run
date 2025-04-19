@@ -40,5 +40,6 @@ jobs:
       - name: 🚀 Preview release
         uses: variableland/gh-actions/actions/monorepo-preview-release@f63612393c2131ae0b3d277a1c47f4b87085a8e8
         with:
-          auth_token: ${{ secrets.NPM_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_number: ${{ github.event.pull_request.number }}
+          auth_token: ${{ secrets.NPM_TOKEN }}
