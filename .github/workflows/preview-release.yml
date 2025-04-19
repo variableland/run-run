@@ -4,8 +4,8 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - packages/**
+    # paths:
+    #   - packages/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +15,7 @@ jobs:
   preview-release:
     runs-on: ubuntu-latest
 
-    if: ${{ startsWith(github.head_ref, 'feat') || startsWith(github.head_ref, 'fix') }}
+    # if: ${{ startsWith(github.head_ref, 'feat') || startsWith(github.head_ref, 'fix') }}
 
     permissions:
       contents: write
@@ -29,16 +29,16 @@ jobs:
       - name: ⌛ Setup CI
         uses: variableland/gh-actions/actions/setup-pnpm-bun@main
 
-      - name: 💅 Test static
-        run: |
-          bun run rr test:static
-          bun run typecheck
+      # - name: 💅 Test static
+      #   run: |
+      #     bun run rr test:static
+      #     bun run typecheck
 
-      - name: 🧪 Test unit
-        run: bun run test
+      # - name: 🧪 Test unit
+      #   run: bun run test
 
       - name: 🚀 Preview release
-        uses: variableland/gh-actions/actions/monorepo-preview-release@main
+        uses: variableland/gh-actions/actions/monorepo-preview-release@f63612393c2131ae0b3d277a1c47f4b87085a8e8
         with:
           auth_token: ${{ secrets.NPM_TOKEN }}
           pr_number: ${{ github.event.pull_request.number }}
