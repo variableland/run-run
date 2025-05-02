@@ -32,12 +32,12 @@ export function createTypecheckCommand(ctx: Context) {
         });
 
         try {
-          childLogger.start("Type checking...");
+          childLogger.start("Type checking started");
 
           const success = await singleTypecheck(project.rootDir);
 
           if (success) {
-            childLogger.success("Typecheck completed successfully");
+            childLogger.success("Typecheck completed");
           }
         } catch (error) {
           childLogger.error("Typecheck failed");
